@@ -112,6 +112,71 @@ form .formGrid .submit {
     border: none;
 }
 
+/* Style de base pour le menu */
+ul.menu {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+}
+
+ul.menu li {
+    position: relative;
+}
+
+ul.menu a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    transition: background-color 0.3s, border-bottom 0.3s; /* Transition sur la couleur et soulignement */
+}
+
+/* Souligner au survol */
+ul.menu a:hover {
+    /*background-color: #444;*/
+    border-bottom: 3px solid blue; /* Souligné au survol */
+}
+
+/* Style du sous-menu */
+ul.submenu {
+    display: none;  /* Masquer le sous-menu par défaut */
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background-color: var(--headerColor);
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    border-radius: 5px;
+}
+
+ul.submenu li {
+    width: 100%;
+}
+
+ul.submenu a {
+    padding: 10px;
+    text-decoration: none;
+}
+
+ul.submenu a:hover {
+    background-color: white;
+    border-bottom: 0px;
+    font-size: 20px;
+    color: var(--headerColor)
+
+}
+
+/* Afficher le sous-menu lors du survol de l'élément parent */
+.menu-item:hover > .submenu {
+    display: block;
+}
+
 /**
  * Coin replié des formulaires
  */

@@ -18,7 +18,7 @@ class ArticleManager extends AbstractEntityManager
         while ($article = $result->fetch()) {
             $articles[] = new Article($article);
         }
-        return $articles;
+       return $articles;
     }
     
     /**
@@ -59,11 +59,12 @@ class ArticleManager extends AbstractEntityManager
      */
     public function addArticle(Article $article) : void
     {
-        $sql = "INSERT INTO article (id_user, title, content, date_creation) VALUES (:id_user, :title, :content, NOW())";
+        $sql = "INSERT INTO article (id_user, title, content, date_creation,nbvues) VALUES (:id_user, :title, :content, NOW(),:nbvue)";
         $this->db->query($sql, [
             'id_user' => $article->getIdUser(),
             'title' => $article->getTitle(),
-            'content' => $article->getContent()
+            'content' => $article->getContent(),
+            'nb_vue' => $article->getNbvues()
         ]);
     }
 
@@ -74,10 +75,11 @@ class ArticleManager extends AbstractEntityManager
      */
     public function updateArticle(Article $article) : void
     {
-        $sql = "UPDATE article SET title = :title, content = :content, date_update = NOW() WHERE id = :id";
+        $sql = "UPDATE article SET title = :title, content = :content, date_update = NOW(), nbvues = :nb_vue  WHERE id = :id";
         $this->db->query($sql, [
             'title' => $article->getTitle(),
             'content' => $article->getContent(),
+            'nb_vue' => $article->getNbvues(),
             'id' => $article->getId()
         ]);
     }

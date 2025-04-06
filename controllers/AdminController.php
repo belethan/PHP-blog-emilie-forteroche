@@ -78,6 +78,7 @@ class AdminController {
         // On connecte l'utilisateur.
         $_SESSION['user'] = $user;
         $_SESSION['idUser'] = $user->getId();
+        $_SESSION['login'] = $user->getLogin();
 
         // On redirige vers la page d'administration.
         Utils::redirect("admin");

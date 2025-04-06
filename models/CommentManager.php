@@ -22,6 +22,7 @@ class CommentManager extends AbstractEntityManager
         return $comments;
     }
 
+
     /**
      * Récupère un commentaire par son id.
      * @param int $id : l'id du commentaire.

@@ -9,6 +9,7 @@
     private int $idUser;
     private string $title = "";
     private string $content = "";
+    private int $nbvues=0;
     private ?DateTime $dateCreation = null;
     private ?DateTime $dateUpdate = null;  
 
@@ -126,5 +127,14 @@
     public function getDateUpdate() : ?DateTime 
     {
         return $this->dateUpdate;
+    }
+    public function setNbvues(int $nb_vues) : void
+    {
+        $this->nbvues = $nb_vues;
+    }
+
+    public function getNbvues() : int
+    {
+         return $this->nbvues;
     }
  }

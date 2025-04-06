@@ -26,9 +26,12 @@
             <?php 
                 // Si on est connecté, on affiche le bouton de déconnexion, sinon, on affiche le bouton de connexion : 
                 if (isset($_SESSION['user'])) {
-                    echo ' <li class="menu-item"> <a href="index.php?action=disconnectUser">Connecté : Coquemert  Ludovic</a>';
+                    $user_actif =$_SESSION['login'];
+                    //$nomUser =$user_actif->getlogin();
+                    //var_dump($user_actif);
+                    echo ' <li class="menu-item"> <a href="index.php?action=disconnectUser">Connecté :'.$user_actif.'</a>';
                     echo ' <ul class="submenu">';
-                        echo '<li> <a href="#">Liste des articles</a> </li>';
+                        echo '<li> <a href="index.php?action=admin"">Liste des articles</a> </li>';
                         echo '<li> <a href="#">Liste des commentaires</a> </li>';
                         echo '<li> <a href="#">Liste des Utilisateurs</a> </li>';
                     echo '</ul> </li>';

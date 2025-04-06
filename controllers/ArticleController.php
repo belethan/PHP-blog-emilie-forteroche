@@ -30,7 +30,12 @@ class ArticleController
         if (!$article) {
             throw new Exception("L'article demandé n'existe pas.");
         }
-
+        /* incrementer le nombre de vue */
+        $vueQte = $article->getNbvues()+1;
+        $article->setNbvues($vueQte);        /* Mettre à jour le compteur de vues */
+        /* Modifier la valeur dans la table Article */
+        $articleManager->updateArticle($article);
+        /* affichage des commentaires */
         $commentManager = new CommentManager();
         $comments = $commentManager->getAllCommentsByArticleId($id);
 

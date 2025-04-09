@@ -22,6 +22,9 @@ class CommentManager extends AbstractEntityManager
         return $comments;
     }
 
+    public function getAllComments() : array{
+        $sql = "SELECT a.id, FROM comment a left join article b on (a.id_article = :idArticle)";
+    }
 
     /**
      * Récupère un commentaire par son id.

@@ -11,7 +11,8 @@
     private string $content = "";
     private int $nbvues=0;
     private ?DateTime $dateCreation = null;
-    private ?DateTime $dateUpdate = null;  
+    private ?DateTime $dateUpdate = null;
+    private int $qteCommentaires = 0;
 
     /**
      * Setter pour l'id de l'utilisateur. 
@@ -128,13 +129,37 @@
     {
         return $this->dateUpdate;
     }
-    public function setNbvues(int $nb_vues) : void
+
+     /**
+      * @param int $nb_vues
+      * @return void
+      */
+     public function setNbvues(int $nb_vues) : void
     {
         $this->nbvues = $nb_vues;
     }
 
-    public function getNbvues() : int
+     /**
+      * @return int
+      */
+     public function getNbvues() : int
     {
          return $this->nbvues;
+    }
+
+     /**
+      * @param int $qte_commentaires
+      * @return void
+      */
+     public function setQteCommentaires(int $qte_commentaires) : void{
+        $this->qteCommentaires = $qte_commentaires;
+    }
+
+     /**
+      * @return int
+      */
+     public function getQteCommentaires() : int
+    {
+        return $this->qteCommentaires;
     }
  }

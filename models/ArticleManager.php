@@ -20,7 +20,25 @@ class ArticleManager extends AbstractEntityManager
         }
        return $articles;
     }
-    
+
+    /**
+     *  Récupère tous les articles et affiche le nombre de vue et de commentaires.
+     * @return array
+     */
+    public function getAllArticlesGroupByComment() : array{
+        $sql = "select Count(b.id) as 'qteCommentaires',a.id,a.title,a.nbvues,a.date_creation FROM article a
+        Left join comment b On (a.id = b.id_article)
+        group by a.id,a.title,a.nbvues,a.date_creation
+        order by a.date_creation asc";
+        $result = $this->db->query($sql);
+        $articles = [];
+        while ($article = $result->fetch()) {
+            $articles[] = new Article($article);
+        }
+        return $articles;
+    }
+
+
     /**
      * Récupère un article par son id.
      * @param int $id : l'id de l'article.

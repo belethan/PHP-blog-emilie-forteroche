@@ -11,7 +11,7 @@ class Comment extends AbstractEntity
     private string $pseudo;
     private string $content;
     private DateTime $dateCreation;
-    
+
     /**
      * Getter pour l'id de l'article.
      * @return int

@@ -1,10 +1,10 @@
-<?php 
+<?php
 /**
- * Ce fichier est le template principal qui "contient" ce qui aura été généré par les autres vues.  
- * 
- * Les variables qui doivent impérativement être définie sont : 
+ * Ce fichier est le template principal qui "contient" ce qui aura été généré par les autres vues.
+ *
+ * Les variables qui doivent impérativement être définie sont :
  *      $title string : le titre de la page.
- *      $content string : le contenu de la page. 
+ *      $content string : le contenu de la page.
  */
 
 ?>
@@ -18,39 +18,37 @@
 </head>
 
 <body>
-    <header>
-        <nav>
+<header>
+    <nav>
         <ul class="menu">
-          <li>  <a href="index.php">Articles</a> </li>
-          <li>  <a href="index.php?action=apropos">À propos</a> </li>
-            <?php 
-                // Si on est connecté, on affiche le bouton de déconnexion, sinon, on affiche le bouton de connexion : 
-                if (isset($_SESSION['user'])) {
-                    $user_actif =$_SESSION['login'];
-                    //$nomUser =$user_actif->getlogin();
-                    //var_dump($user_actif);
-                    echo ' <li class="menu-item"> <a href="index.php?action=disconnectUser">Connecté :'.$user_actif.'</a>';
-                    echo ' <ul class="submenu">';
-                        echo '<li> <a href="index.php?action=admin"">Liste des articles</a> </li>';
-                        echo '<li> <a href="#">Liste des commentaires</a> </li>';
-                        echo '<li> <a href="#">Liste des Utilisateurs</a> </li>';
-                    echo '</ul> </li>';
-                    echo '<li><a href="index.php?action=disconnectUser">Déconnexion</a></li>';
-                }
+            <li><a href="index.php">Articles</a></li>
+            <li><a href="index.php?action=apropos">À propos</a></li>
+            <?php
+            // Si on est connecté, on affiche le bouton de déconnexion, sinon, on affiche le bouton de connexion :
+            if (isset($_SESSION['user'])) {
+                //$user_actif =;
+                echo ' <li class="menu-item"> <a href="#">Connecté :' . $_SESSION['login'] . '</a>';
+                echo ' <ul class="submenu">';
+                echo '<li> <a href="index.php?action=admin"">Liste des articles</a> </li>';
+                echo '<li> <a href="#">Liste des commentaires</a> </li>';
+                echo '<li> <a href="#">Liste des Utilisateurs</a> </li>';
+                echo '</ul> </li>';
+                echo '<li><a href="index.php?action=disconnectUser">Déconnexion</a></li>';
+            }
             ?>
 
         </ul>
-        </nav>
-        <h1>Emilie Forteroche</h1>
-    </header>
+    </nav>
+    <h1>Emilie Forteroche</h1>
+</header>
 
-    <main>    
-        <?= $content /* Ici est affiché le contenu réel de la page. */ ?>
-    </main>
-    
-    <footer>
-        <p>Copyright © Emilie Forteroche 2023 - Openclassrooms - <a href="index.php?action=admin">Admin</a>
-    </footer>
+<main>
+    <?= $content /* Ici est affiché le contenu réel de la page. */ ?>
+</main>
+
+<footer>
+    <p>Copyright © Emilie Forteroche 2023 - Openclassrooms - <a href="index.php?action=admin">Admin</a>
+</footer>
 
 </body>
 </html>

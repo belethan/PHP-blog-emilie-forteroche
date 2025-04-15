@@ -166,7 +166,7 @@ ul.submenu a {
 
 ul.submenu a:hover {
     background-color: white;
-    border-bottom: 0px;
+    border-bottom: 0;
     font-size: 20px;
     color: var(--headerColor)
 

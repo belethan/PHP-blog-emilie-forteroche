@@ -15,6 +15,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emilie Forteroche</title>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 </head>
 
 <body>
@@ -29,8 +32,8 @@
                 //$user_actif =;
                 echo ' <li class="menu-item"> <a href="#">Connecté :' . $_SESSION['login'] . '</a>';
                 echo ' <ul class="submenu">';
-                echo '<li> <a href="index.php?action=admin"">Liste des articles</a> </li>';
-                echo '<li> <a href="#">Liste des commentaires</a> </li>';
+                echo '<li> <a href="index.php?action=admin">Liste des articles</a> </li>';
+                echo '<li> <a href="index.php?action=showStatisticsArticle">Liste des commentaires</a> </li>';
                 echo '<li> <a href="#">Liste des Utilisateurs</a> </li>';
                 echo '</ul> </li>';
                 echo '<li><a href="index.php?action=disconnectUser">Déconnexion</a></li>';
@@ -50,5 +53,32 @@
     <p>Copyright © Emilie Forteroche 2023 - Openclassrooms - <a href="index.php?action=admin">Admin</a>
 </footer>
 
+<script>
+    $(document).ready(function () {
+        $('#TableBlog').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: '/controleur/articleController.php',
+                    type: 'POST'
+                },
+                columns: [
+                    { data: 'id', visible: false },
+                    { data: 'creer' },
+                    { data: 'titre' },
+                    { data: 'nb_commentaire' },
+                    { data: 'nb_vues' },
+                    {
+                        data: 'id',
+                        orderable: false,
+                        searchable: false,
+                        render: function (data) {
+                            return `<a href="/details.php?id=${data}" class="btn-details">Détails</a>`;
+                        }
+                    }
+                ]
+         });
+    });
+</script>
 </body>
 </html>

@@ -29,7 +29,8 @@ try {
 
         case 'showStatisticsArticle':
             $articleController = new ArticleController();
-
+            $articleController->ShowArticleSatistique();
+            break;
 
         case 'addArticle':
             $articleController = new ArticleController();

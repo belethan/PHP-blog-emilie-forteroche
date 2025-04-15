@@ -25,12 +25,12 @@ class ArticleManager extends AbstractEntityManager
      *  Récupère tous les articles et affiche le nombre de vue et de commentaires.
      * @return array
      */
-    public function getAllArticlesGroupByComment() : array{
+    public function getAllArticlesGroupByComment(string $colonne, string $sens) : array{
         $sql = "select Count(b.id) as 'qteCommentaires',a.id,a.title,a.nbvues,a.date_creation FROM article a
         Left join comment b On (a.id = b.id_article)
         group by a.id,a.title,a.nbvues,a.date_creation
-        order by a.date_creation asc";
-        $result = $this->db->query($sql);
+        order by :colonne :sens";
+        $result = $this->db->query($sql,['colonne'=>$colonne,'sens'=>$sens]);
         $articles = [];
         while ($article = $result->fetch()) {
             $articles[] = new Article($article);

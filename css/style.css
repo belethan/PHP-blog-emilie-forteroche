@@ -402,6 +402,41 @@ a.info {
     border: 1px solid var(--backgroundColor);
 }
 
+
+/**
+Gestion DataTable entete et ligne
+*/
+/* Couleur de l'en-tête */
+table.dataTable thead {
+    background-color: orange;
+    color: white;
+}
+
+/* Alternance des couleurs des lignes */
+table.dataTable tbody tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+table.dataTable tbody tr:nth-child(even) {
+    background-color: #efd499; /* orange très clair */
+}
+
+/* Supprimer la recherche */
+div.dataTables_filter {
+    display: none;
+}
+.btn-detail {
+    padding: 5px 10px;
+    background-color: #FFA500;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.pagination .active {
+    color: orange;
+    font-weight: bold;
+}
+
 /** 
  * Footer global de la page.
  */

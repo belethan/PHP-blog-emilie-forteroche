@@ -16,6 +16,25 @@ class ArticleController
     }
 
     /**
+     * Affiche la page avec entête DataTable.
+     * @return void
+     */
+    public function ShowArticleSatistique() : void
+    {
+        $colonne = Utils::request("column", 'date_creation');
+        $sens=Utils::request("sens", 'desc');
+        $articleManager = new ArticleManager();
+        $articles = $articleManager->getAllArticlesGroupByComment($colonne,$sens);
+
+        if (empty($articles)) {
+            throw new Exception("Aucun articles de disponible");
+        }
+
+        $view = new View("Article par commentaire"  );
+        $view->render("ArticleDataStatistic" );
+    }
+
+    /**
      * Affiche le détail d'un article.
      * @return void
      */

@@ -10,10 +10,10 @@
             <th>id</th>
             <th>Crée le</th>
             <th>Titre</th>
-            <th>Nb Commentaire</th>
-            <th>Nb Vues</th>
+            <th>Nombre Vues</th>
+            <th>Nombre Commentaires</th>
             <th>Lien Commentaire</th>
         </tr>
     </thead>
 </table>
-<div id="pagination" class="pagination"></div>
+<!--<div id="pagination" class="pagination"></div>-->

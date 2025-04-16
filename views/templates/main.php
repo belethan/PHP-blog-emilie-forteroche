@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emilie Forteroche</title>
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
 
 </head>
 
@@ -53,32 +53,54 @@
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
 <script>
     $(document).ready(function () {
         $('#TableBlog').DataTable({
-                processing: true,
-                serverSide: true,
+               processing: true,
+               serverSide: true,
+               paging:false,
+               info: false,
+               searching:false,
+                order: [[1, 'asc']],
                 ajax: {
                     url: 'index.php?action=showStatisticsArticle',
                     type: 'POST'
                 },
                 columns: [
-                    { data: 'id' },
+                    { data: 'id',
+                        visible:false,
+                        orderable: false
+                    },
                     { data: 'datecreation'  },
-                    { data: 'titre'  },
+                    { data: 'title'  },
                     { data: 'nbvues'  },
                     { data: 'qteCommentaires'  },
-                    {
-                        data: 'details',
-                        orderable: false,
-                        searchable: false,
-                        render: function (data) {
-                            return `<a href="/details.php?id=${data}" class="btn-details">Détails</a>`;
-                        }
-                    }
+                    {data: 'details'    }
                 ],
-
+                columnDefs: [
+                    { width: "50px", targets: 0 },
+                    { width: "140px", targets: 1 },
+                    { width: "380px", targets: 2 },
+                    { width: "50px", targets: 3 },
+                    { width: "50px", targets: 4 },
+                    {
+                        width: "100px",
+                        targets: 5,
+                        orderable: false,
+                        render:function(data, type, row) {
+                            var id = row.id; // Supposons que l'ID est dans la 1ère colonne
+                            return '<a href="details.php?id=' + id + '" class="comment-btn">Voir</a>';
+                        }
+                    },
+                    { targets: [3], className: 'dt-center' },
+                    { targets: [4], className: 'dt-center' },
+                    { targets: [5], className: 'dt-center' },
+               ],
+               scrollX: true
+         });
+         $('#TableBlog tbody').on('click', 'tr', function () {
+            $(this).toggleClass('selected').siblings().removeClass('selected');
          });
     });
 </script>

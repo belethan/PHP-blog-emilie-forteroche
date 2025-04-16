@@ -167,11 +167,11 @@
          $data = [
              'id' => strval($this->id),
              'datecreation' => utils::convertDateToFrenchFormat($this->getDateCreation()),
-             'titre' => $this->getTitle(),
+             'title' => $this->getTitle(),
              'nbvues' => strval($this->getNbvues()),
              'qteCommentaires' => strval($this->getQteCommentaires()),
              'details' => ""
          ];
-         return $data; //json_encode($data,JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+         return $data;
     }
  }

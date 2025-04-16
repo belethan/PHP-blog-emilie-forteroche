@@ -40,15 +40,15 @@ class ArticleManager extends AbstractEntityManager
      * de la méthode. Enfin, les articles sont retournés sous forme d'un tableau d'objets `Article`.
      * @return array : un tableau d'objets Article.
     */
-    public function getAllArticlesGroupByComment(int $start, int $lenght, string $colonne, string $sens) : array
+    public function getAllArticlesGroupByComment(string $tridata = '') : array
     {
-        $sql = "SELECT Count(b.id) as 'qteCommentaires',a.id,a.title,a.nbvues,a.date_creation FROM article a
+       $sql = "SELECT Count(b.id) as 'qteCommentaires',a.id,a.title,a.nbvues,a.date_creation FROM article a
        LEFT JOIN comment b On (a.id = b.id_article)
        GROUP BY a.id,a.title,a.nbvues,a.date_creation
-       ORDER BY :colonne :sens";
-       /*LIMIT :lenght OFFSET :start" */
+       $tridata";
 
-        $result = $this->db->query($sql,['colonne'=>$colonne,'sens'=>$sens]); /*'start'=>$start,'lenght'=>$lenght*/
+
+        $result = $this->db->query($sql); /*'start'=>$start,'lenght'=>$lenght*/
         $articles = [];
         while ($article = $result->fetch()) {
             $DataArticle = new Article($article);

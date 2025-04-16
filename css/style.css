@@ -408,7 +408,7 @@ Gestion DataTable entete et ligne
 */
 /* Couleur de l'en-tête */
 table.dataTable thead {
-    background-color: orange;
+    background-color: var(--headerColor);
     color: white;
 }
 
@@ -418,13 +418,22 @@ table.dataTable tbody tr:nth-child(odd) {
 }
 
 table.dataTable tbody tr:nth-child(even) {
-    background-color: #efd499; /* orange très clair */
+    background-color: var(--headerPaleColor); /* orange très clair */
 }
 
 /* Supprimer la recherche */
 div.dataTables_filter {
     display: none;
 }
+
+tr.selected {
+    background-color: #95cced !important; /* Bleu clair */
+}
+
+.center-text {
+    text-align: center;
+}
+
 .btn-detail {
     padding: 5px 10px;
     background-color: #FFA500;
@@ -432,9 +441,20 @@ div.dataTables_filter {
     border: none;
     cursor: pointer;
 }
-.pagination .active {
-    color: orange;
-    font-weight: bold;
+.comment-btn {
+    background-color: var(--headerColor);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 6px 15px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+}
+
+.comment-btn:hover {
+    background-color: darkorange;
 }
 
 /** 

@@ -27,15 +27,19 @@ class ArticleController
         $length = Utils::request('length',null);
         $order = Utils::request('order',null);
         /* Référencement des colonnes d'un tableau */
-        $columns = ['a.id', 'a.date_creation', 'a.titre', 'qteCommentaires', 'a.nbvues'];
+        $columns = ['a.id', 'a.date_creation', 'a.title', 'a.nbvues', 'qteCommentaires'];
+        $tridatable = "";
         /* extraction pour le tri sur la colonne choisit */
-        $orderColumnIndex = $order[0]['column'];
-        $orderColumn = $columns[$orderColumnIndex];
-        $orderDir = $order[0]['dir'];
+        if (!empty($order[0]['column'])) {
+            $orderColumnIndex = $order[0]['column'];
+            $orderDir = $order[0]['dir'];
+            $orderColumn = $columns[$orderColumnIndex] ?? "";
+            $tridatable = " ORDER BY $orderColumn $orderDir";
+        }
 
         $articleManager = new ArticleManager();
         $total = $articleManager->getCountAllArticles();
-        $data = $articleManager->getAllArticlesGroupByComment($start,$length,$orderColumn,$orderDir);
+        $data = $articleManager->getAllArticlesGroupByComment($tridatable);
        // Format JSON attendu par DataTables
         $response = [
             "draw" => intval($draw),

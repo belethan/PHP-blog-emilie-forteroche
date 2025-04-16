@@ -20,20 +20,40 @@ class ArticleManager extends AbstractEntityManager
         }
        return $articles;
     }
+    /*
+     * La méthode `getCountAllArticles()` est une fonction publique définie dans la classe `ArticleManager`,
+     * qui a pour objectif de compter tous les articles présents dans la table `article` de la base de données,
+     * et de retourner ce nombre sous forme d'un entier.
+     * @return int : nombre article au total.
+     */
+    public function getCountAllArticles() : int
+    {
+        $sql = "SELECT Count(id) FROM article";
+        $result = $this->db->query($sql);
+        return $result->fetchColumn();
+    }
 
     /**
-     *  Récupère tous les articles et affiche le nombre de vue et de commentaires.
-     * @return array
-     */
-    public function getAllArticlesGroupByComment(string $colonne, string $sens) : array{
-        $sql = "select Count(b.id) as 'qteCommentaires',a.id,a.title,a.nbvues,a.date_creation FROM article a
-        Left join comment b On (a.id = b.id_article)
-        group by a.id,a.title,a.nbvues,a.date_creation
-        order by :colonne :sens";
-        $result = $this->db->query($sql,['colonne'=>$colonne,'sens'=>$sens]);
+     * Cette fonction appartient à la classe `ArticleManager` et sert à récupérer une liste paginée d'articles,
+     * tout en comptant le nombre de commentaires associés à chaque article.
+     * Les résultats sont ensuite triés en fonction d'une colonne et d'un sens définis dynamiquement par les paramètres
+     * de la méthode. Enfin, les articles sont retournés sous forme d'un tableau d'objets `Article`.
+     * @return array : un tableau d'objets Article.
+    */
+    public function getAllArticlesGroupByComment(int $start, int $lenght, string $colonne, string $sens) : array
+    {
+        $sql = "SELECT Count(b.id) as 'qteCommentaires',a.id,a.title,a.nbvues,a.date_creation FROM article a
+       LEFT JOIN comment b On (a.id = b.id_article)
+       GROUP BY a.id,a.title,a.nbvues,a.date_creation
+       ORDER BY :colonne :sens";
+       /*LIMIT :lenght OFFSET :start" */
+
+        $result = $this->db->query($sql,['colonne'=>$colonne,'sens'=>$sens]); /*'start'=>$start,'lenght'=>$lenght*/
         $articles = [];
         while ($article = $result->fetch()) {
-            $articles[] = new Article($article);
+            $DataArticle = new Article($article);
+            $articles[]= $DataArticle->jsonSerializeDatatable();
+
         }
         return $articles;
     }

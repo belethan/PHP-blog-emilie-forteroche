@@ -27,9 +27,14 @@ try {
             $articleController->showArticle();
             break;
 
+        Case 'ShowStatistics':
+            $articleController = new ArticleController();
+            $articleController->ShowDatatable();
+            break;
+
         case 'showStatisticsArticle':
             $articleController = new ArticleController();
-            $articleController->ShowArticleSatistique();
+            $articleController->DatatableArticle();
             break;
 
         case 'addArticle':

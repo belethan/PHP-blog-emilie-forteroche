@@ -19,19 +19,39 @@ class ArticleController
      * Affiche la page avec entête DataTable.
      * @return void
      */
-    public function ShowArticleSatistique() : void
+     Public function DatatableArticle() : void
     {
-        $colonne = Utils::request("column", 'date_creation');
-        $sens=Utils::request("sens", 'desc');
+        /* Récupération des données POST */
+        $draw = Utils::request("draw", 1 );
+        $start = Utils::request('start',1);
+        $length = Utils::request('length',null);
+        $order = Utils::request('order',null);
+        /* Référencement des colonnes d'un tableau */
+        $columns = ['a.id', 'a.date_creation', 'a.titre', 'qteCommentaires', 'a.nbvues'];
+        /* extraction pour le tri sur la colonne choisit */
+        $orderColumnIndex = $order[0]['column'];
+        $orderColumn = $columns[$orderColumnIndex];
+        $orderDir = $order[0]['dir'];
+
         $articleManager = new ArticleManager();
-        $articles = $articleManager->getAllArticlesGroupByComment($colonne,$sens);
+        $total = $articleManager->getCountAllArticles();
+        $data = $articleManager->getAllArticlesGroupByComment($start,$length,$orderColumn,$orderDir);
+       // Format JSON attendu par DataTables
+        $response = [
+            "draw" => intval($draw),
+            "recordsTotal" => $total,
+            "data" => $data
+        ];
+        /* - Le type MIME de la réponse est défini comme **JSON** */
+        header('Content-Type: application/json');
+        $infoData =json_encode($response,JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        echo $infoData;
+    }
 
-        if (empty($articles)) {
-            throw new Exception("Aucun articles de disponible");
-        }
-
-        $view = new View("Article par commentaire"  );
-        $view->render("ArticleDataStatistic" );
+    public function ShowDatatable() : void
+    {
+        $view = new View("liste Data");
+        $view->render("ArticleDataStatistic");
     }
 
     /**

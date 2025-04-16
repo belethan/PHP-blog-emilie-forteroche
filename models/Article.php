@@ -10,7 +10,7 @@
     private string $title = "";
     private string $content = "";
     private int $nbvues=0;
-    private ?DateTime $dateCreation = null;
+    private ?DateTime $date_Creation = null;
     private ?DateTime $dateUpdate = null;
     private int $qteCommentaires = 0;
 
@@ -87,12 +87,12 @@
      * @param string $format : le format pour la convertion de la date si elle est une string.
      * Par défaut, c'est le format de date mysql qui est utilisé. 
      */
-    public function setDateCreation(string|DateTime $dateCreation, string $format = 'Y-m-d H:i:s') : void 
+    public function setDateCreation(string|DateTime $dateCreation, string $format = 'Y-m-d H:i:s') : void
     {
         if (is_string($dateCreation)) {
             $dateCreation = DateTime::createFromFormat($format, $dateCreation);
         }
-        $this->dateCreation = $dateCreation;
+        $this->date_Creation = $dateCreation;
     }
 
     /**
@@ -100,9 +100,9 @@
      * Grâce au setter, on a la garantie de récupérer un objet DateTime.
      * @return DateTime
      */
-    public function getDateCreation() : DateTime 
+    public function getDateCreation() : DateTime
     {
-        return $this->dateCreation;
+        return $this->date_Creation;
     }
 
     /**
@@ -161,5 +161,17 @@
      public function getQteCommentaires() : int
     {
         return $this->qteCommentaires;
+    }
+
+    public function jsonSerializeDatatable():mixed {
+         $data = [
+             'id' => strval($this->id),
+             'datecreation' => utils::convertDateToFrenchFormat($this->getDateCreation()),
+             'titre' => $this->getTitle(),
+             'nbvues' => strval($this->getNbvues()),
+             'qteCommentaires' => strval($this->getQteCommentaires()),
+             'details' => ""
+         ];
+         return $data; //json_encode($data,JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     }
  }

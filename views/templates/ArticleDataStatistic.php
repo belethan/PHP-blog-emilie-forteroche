@@ -3,19 +3,17 @@
  * Affichage de Liste des articles.
  */
 ?>
-<table id="TableBlog" class="display"">
+<h2> Liste des Articles et Commentaires </h2>
+<table id="TableBlog" class="display" style="width:100%">
     <thead>
         <tr>
-            <th style="display:none;">ID</th>
+            <th>id</th>
             <th>Crée le</th>
             <th>Titre</th>
             <th>Nb Commentaire</th>
             <th>Nb Vues</th>
-            <th>Liste Commentaire</th>
+            <th>Lien Commentaire</th>
         </tr>
     </thead>
-    <tbody>
-        <!--code ajax-->
-    </tbody>
 </table>
 <div id="pagination" class="pagination"></div>

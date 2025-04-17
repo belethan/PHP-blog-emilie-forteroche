@@ -33,7 +33,7 @@ $(document).ready(function () {
                 orderable: false,
                 render:function(data, type, row) {
                     var id = row.id; // Supposons que l'ID est dans la 1ère colonne
-                    return '<a href="details.php?id=' + id + '" class="comment-btn">Voir</a>';
+                    return '<a href="index.php?action=showComment&id=' + id + '" class="comment-btn">Voir</a>';
                 }
             },
             { targets: [3], className: 'dt-center' },

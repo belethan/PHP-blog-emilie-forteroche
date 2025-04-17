@@ -36,7 +36,7 @@ class ArticleController
             $orderColumn = $columns[$orderColumnIndex] ?? "";
             $tridatable = " ORDER BY $orderColumn $orderDir";
         }
-
+        /* Requete affichage des donnés */
         $articleManager = new ArticleManager();
         $total = $articleManager->getCountAllArticles();
         $data = $articleManager->getAllArticlesGroupByComment($tridatable);
@@ -48,6 +48,7 @@ class ArticleController
         ];
         /* - Le type MIME de la réponse est défini comme **JSON** */
         header('Content-Type: application/json');
+        /* encodage de la réponse en JSON */
         $infoData =json_encode($response,JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         echo $infoData;
     }

@@ -46,8 +46,10 @@ try {
             $commentController = new CommentController();
             $commentController->addComment();
             break;
-
-
+        case 'showComment':
+            $commentController = new CommentController();
+            $commentController->ShowTitleComment();
+            break;
         // Section admin & connexion. 
         case 'admin': 
             $adminController = new AdminController();

@@ -11,7 +11,7 @@ class Comment extends AbstractEntity
     private string $pseudo;
     private string $content;
     private DateTime $dateCreation;
-
+    Private string $title;
     /**
      * Getter pour l'id de l'article.
      * @return int
@@ -91,6 +91,20 @@ class Comment extends AbstractEntity
             $dateCreation = DateTime::createFromFormat($format, $dateCreation);
         }
         $this->dateCreation = $dateCreation;
+    }
+
+    public function setTitle(string $title) : void
+    {
+        $this->title = $title;
+    }
+
+    /**
+     * Getter pour le titre.
+     * @return string
+     */
+    public function getTitle() : string
+    {
+        return $this->title;
     }
 
 }
